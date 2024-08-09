@@ -59,10 +59,10 @@ app.route("/user")
       });
 
       const savedUser = await user.save();
-      res.json(savedUser);  // Only send the response once the user is saved
+      res.json(savedUser);
 
     } catch (err) {
-      res.status(400).json({ success: false, error: err.message });  // Handle errors properly
+      res.status(400).json({ success: false, error: err.message });
     }
   })
   .put((req, res) => {
@@ -77,8 +77,28 @@ app.route("/people")
   .get((req, res) => {
     res.send("People");
   })
-  .post((req, res) => {
-    res.send("People created");
+  .post(async (req, res) => {
+    try {
+      const user = new User({
+        name: req.body.name,
+        title: req.body.title,
+        short_title: req.body.short_title,
+        email: req.body.email,
+        bio: req.body.bio,
+        image: req.body.image,
+        sector: req.body.sector,
+        quote: req.body.quote,
+        social: req.body.social,
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+      });
+
+      const savedPeople = await people.save();
+      res.json(savedPeople);
+
+    } catch (err) {
+      res.status(400).json({ success: false, error: err.message });
+    }
   })
   .put((req, res) => {
     res.send("People updated");
@@ -93,7 +113,22 @@ app.route("/quote")
     res.send("Quote");
   })
   .post((req, res) => {
-    res.send("Quote created");
+    try {
+      const user = new User({
+        title: req.body.title,
+        quote: req.body.quote,
+        name: req.body.name,
+        company: req.body.company,
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+      });
+
+      const savedQuote = await quote.save();
+      res.json(savedQuote);
+
+    } catch (err) {
+      res.status(400).json({ success: false, error: err.message });
+    }
   })
   .put((req, res) => {
     res.send("Quote updated");
@@ -108,7 +143,30 @@ app.route("/company")
     res.send("Company");
   })
   .post((req, res) => {
-    res.send("Company created");
+    try {
+      const user = new User({
+        title: req.body.title,
+        sector: req.body.sector,
+        location: req.body.location,
+        status req.body.status,
+        num_of_people req.body.num_of_people,
+        website: req.body.website,
+        social: req.body.social,
+        black_logo: req.body.black_logo,
+        white_logo: req.body.white_logo,
+        quote: req.body.quote,
+        ceo_name: req.body.ceo_name,
+        ceo_title: req.body.ceo_title,
+        createdAt: Date.now(),
+        updatedAt: Date.now()
+      });
+
+      const savedQuote = await quote.save();
+      res.json(savedQuote);
+
+    } catch (err) {
+      res.status(400).json({ success: false, error: err.message });
+    }
   })
   .put((req, res) => {
     res.send("Company updated");
